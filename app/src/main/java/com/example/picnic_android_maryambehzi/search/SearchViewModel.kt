@@ -1,6 +1,8 @@
 package com.example.picnic_android_maryambehzi.search
 
 import android.util.Log
+import android.widget.EditText
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,6 +18,14 @@ class SearchViewModel : ViewModel() {
     val gif: LiveData<GifModel>
         get() = _gif
 
+    private val _searchResult = MutableLiveData<List<GifModel>>()
+    val searchResult: LiveData<List<GifModel>>
+        get() = _searchResult
+
+    private val _query = MutableLiveData<String>()
+    val query: LiveData<String>
+        get() = _query
+
     init {
         getRandomGif()
     }
@@ -27,6 +37,26 @@ class SearchViewModel : ViewModel() {
             }catch (e: Exception){
                 print(e)
 
+            }
+        }
+    }
+
+    private fun search(){
+        viewModelScope.launch {
+            try {
+                _searchResult.value = query.value?.let { GiphyApi.retrofitService.searchQuery(query = it).data }
+            }catch (e: Exception){
+                print(e)
+                _searchResult.value = emptyList()
+            }
+        }
+    }
+
+    fun textWatcherSearch(input: EditText) {
+        input.doOnTextChanged { text, _, _, count ->
+            _query.value = text.toString()
+            if (count >= 2) {
+                search()
             }
         }
     }

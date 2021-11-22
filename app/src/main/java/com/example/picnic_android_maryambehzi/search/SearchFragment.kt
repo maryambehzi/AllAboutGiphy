@@ -20,6 +20,8 @@ class SearchFragment : Fragment() {
 
         binding.lifecycleOwner = requireActivity()
 
+        viewModel.textWatcherSearch(binding.searchBarEdittext)
+
         binding.viewModel = viewModel
 
         return binding.root
