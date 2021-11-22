@@ -5,9 +5,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
-import androidx.databinding.BindingMethod
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.picnic_android_maryambehzi.network.GifModel
+import com.example.picnic_android_maryambehzi.utils.PhotoGridAdapter
 
 @BindingAdapter("setGifTitle")
 fun TextView.setGifTitle(gifModel: GifModel?) {
@@ -43,6 +44,14 @@ fun ImageView.setGifImage(gifModel: GifModel?){
         .into(this)
 }
 
+@BindingAdapter("setPreviewGifImage")
+fun ImageView.setPreviewGifImage(gifModel: GifModel?){
+    Glide.with(context)
+        .asGif()
+        .load(gifModel?.images?.previewGif?.url)
+        .into(this)
+}
+
 @BindingAdapter("isRandomGifVisible")
 fun ConstraintLayout.isRandomGifVisible(isShown : Boolean?){
     isShown?.let {
@@ -52,4 +61,21 @@ fun ConstraintLayout.isRandomGifVisible(isShown : Boolean?){
             View.GONE
         }
     } ?: run { visibility = View.VISIBLE }
+}
+
+@BindingAdapter("isSearchedGifsVisible")
+fun ConstraintLayout.isSearchedGifsVisible(isShown : Boolean?){
+    isShown?.let {
+        visibility = if (it){
+            View.GONE
+        } else{
+            View.VISIBLE
+        }
+    } ?: run { visibility = View.GONE }
+}
+
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<GifModel>?) {
+    val adapter = recyclerView.adapter as? PhotoGridAdapter
+    adapter?.submitList(data)
 }
