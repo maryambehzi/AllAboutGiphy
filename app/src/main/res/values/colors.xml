@@ -12,5 +12,6 @@
     <color name="appYellow">#FFFF00</color>
 
     <color name="search_bar_bg_color">@color/appConcrete</color>
+    <color name="gif_placeholder_bg_color">@color/appConcrete</color>
     <color name="age_restriction_bg_color">@color/appYellow</color>
 </resources>
