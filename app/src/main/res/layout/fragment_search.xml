@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_spacing"
-            app:isRandomGifVisible="@{viewModel.query}"
+            app:isRandomGifVisible="@{viewModel.showRandomGif}"
             app:layout_constraintTop_toBottomOf="@+id/search_bar_container">
 
             <androidx.appcompat.widget.AppCompatTextView

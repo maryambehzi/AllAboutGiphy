@@ -1,5 +1,7 @@
 package com.example.picnic_android_maryambehzi.search
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.EditText
 import androidx.core.widget.doOnTextChanged
@@ -14,6 +16,10 @@ import java.lang.Exception
 
 class SearchViewModel : ViewModel() {
 
+    private val _showRandomGif = MutableLiveData<Boolean>(true)
+    val showRandomGif: LiveData<Boolean>
+        get() = _showRandomGif
+
     private val _gif = MutableLiveData<GifModel>()
     val gif: LiveData<GifModel>
         get() = _gif
@@ -27,7 +33,15 @@ class SearchViewModel : ViewModel() {
         get() = _query
 
     init {
-        getRandomGif()
+        val mainHandler = Handler(Looper.getMainLooper())
+
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                if (showRandomGif.value == true)
+                    getRandomGif()
+                mainHandler.postDelayed(this, 10000)
+            }
+        })
     }
 
     private fun getRandomGif(){
@@ -56,7 +70,11 @@ class SearchViewModel : ViewModel() {
         input.doOnTextChanged { text, _, _, count ->
             _query.value = text.toString()
             if (count >= 2) {
+                _showRandomGif.value = false
                 search()
+            }
+            else{
+                _showRandomGif.value = true
             }
         }
     }

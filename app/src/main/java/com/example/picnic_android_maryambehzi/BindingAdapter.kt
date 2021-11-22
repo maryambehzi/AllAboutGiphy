@@ -44,9 +44,9 @@ fun ImageView.setGifImage(gifModel: GifModel?){
 }
 
 @BindingAdapter("isRandomGifVisible")
-fun ConstraintLayout.isRandomGifVisible(query : String?){
-    query?.let {
-        visibility = if (query.isNullOrEmpty()){
+fun ConstraintLayout.isRandomGifVisible(isShown : Boolean?){
+    isShown?.let {
+        visibility = if (it){
             View.VISIBLE
         } else{
             View.GONE
