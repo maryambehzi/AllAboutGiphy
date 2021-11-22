@@ -32,6 +32,11 @@ class SearchViewModel : ViewModel() {
     val query: LiveData<String>
         get() = _query
 
+    private val _navigateToSelectedGif = MutableLiveData<GifModel>()
+    val navigateToSelectedGif: LiveData<GifModel>
+        get() = _navigateToSelectedGif
+
+
     init {
         val mainHandler = Handler(Looper.getMainLooper())
 
@@ -77,5 +82,13 @@ class SearchViewModel : ViewModel() {
                 _showRandomGif.value = true
             }
         }
+    }
+
+    fun displayPropertyDetails(gifModel: GifModel) {
+        _navigateToSelectedGif.value = gifModel
+    }
+
+    fun displayGifDetailsComplete() {
+        _navigateToSelectedGif.value = null
     }
 }

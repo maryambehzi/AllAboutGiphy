@@ -9,12 +9,16 @@
         android:name="com.example.picnic_android_maryambehzi.search.SearchFragment"
         android:label="SearchFragment" >
         <action
-            android:id="@+id/action_searchFragment_to_detailFragment"
+            android:id="@+id/action_showDetail"
             app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.picnic_android_maryambehzi.detail.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="DetailFragment">
+        <argument
+            android:name="gifModel"
+            app:argType="com.example.picnic_android_maryambehzi.network.GifModel" />
+    </fragment>
 
 </navigation>

@@ -27,6 +27,14 @@ class SearchFragment : Fragment() {
         viewModel.textWatcherSearch(binding.searchBarEdittext)
 
         binding.photosGrid.adapter = PhotoGridAdapter(PhotoGridAdapter.OnClickListener {
+            viewModel.displayPropertyDetails(it)
+        })
+
+        viewModel.navigateToSelectedGif.observe(viewLifecycleOwner, Observer {
+            if ( null != it ) {
+                this.findNavController().navigate(SearchFragmentDirections.actionShowDetail(it))
+                viewModel.displayGifDetailsComplete()
+            }
         })
 
         binding.viewModel = viewModel
