@@ -7,6 +7,10 @@ buildscript {
         // library defined in the app Gradle file
         version_navigation = "1.0.0"
         version_databinding = "3.1.4"
+        version_moshi = "1.9.3"
+        version_retrofit = "2.9.0"
+        version_lifecycle = "2.2.0"
+        version_gson = "2.8.9"
     }
 
     repositories {
