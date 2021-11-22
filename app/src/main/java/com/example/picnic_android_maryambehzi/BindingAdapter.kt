@@ -3,7 +3,9 @@ package com.example.picnic_android_maryambehzi
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
+import androidx.databinding.BindingMethod
 import com.bumptech.glide.Glide
 import com.example.picnic_android_maryambehzi.network.GifModel
 
@@ -39,4 +41,15 @@ fun ImageView.setGifImage(gifModel: GifModel?){
         .asGif()
         .load(gifModel?.images?.fixedHeight?.url)
         .into(this)
+}
+
+@BindingAdapter("isRandomGifVisible")
+fun ConstraintLayout.isRandomGifVisible(query : String?){
+    query?.let {
+        visibility = if (query.isNullOrEmpty()){
+            View.VISIBLE
+        } else{
+            View.GONE
+        }
+    } ?: run { visibility = View.VISIBLE }
 }
