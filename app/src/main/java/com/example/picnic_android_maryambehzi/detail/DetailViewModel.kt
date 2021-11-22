@@ -7,11 +7,11 @@ import androidx.lifecycle.MutableLiveData
 import com.example.picnic_android_maryambehzi.network.GifModel
 
 class DetailViewModel(gifModel: GifModel, app: Application) : AndroidViewModel(app)   {
-    private val _selectedProperty = MutableLiveData<GifModel>()
-    val selectedProperty: LiveData<GifModel>
-        get() = _selectedProperty
+    private val _selectedGif = MutableLiveData<GifModel>()
+    val selectedGif: LiveData<GifModel>
+        get() = _selectedGif
 
     init {
-        _selectedProperty.value = gifModel
+        _selectedGif.value = gifModel
     }
 }
