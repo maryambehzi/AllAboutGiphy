@@ -22,6 +22,9 @@ private val retrofit = Retrofit.Builder()
 interface GiphyApiService {
     @GET("random")
     suspend fun getRandom(@Query(value = "api_key") apiKey :String = API_KEY) : GifResponse
+
+    @GET("search")
+    suspend fun searchQuery(@Query(value = "api_key") apiKey :String = API_KEY, @Query(value = "q") query :String = "") : SearchResponse
 }
 
 object GiphyApi {
