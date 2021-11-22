@@ -6,7 +6,8 @@ data class GifModel(
     @Json(name = Keys.ID) val id : String,
     @Json(name = Keys.URL) val url : String,
     @Json(name = Keys.TITLE) val title : String,
-    @Json(name = Keys.RATING) val rating : String
+    @Json(name = Keys.RATING) val rating : String,
+    @Json(name = Keys.IMAGES) val images : ImageModel
 )
 
 object Keys {
@@ -14,4 +15,5 @@ object Keys {
     const val URL = "url"
     const val TITLE = "title"
     const val RATING = "rating"
+    const val IMAGES = "images"
 }
