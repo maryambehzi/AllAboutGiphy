@@ -1,6 +1,8 @@
 package com.example.picnic_android_maryambehzi.search
 
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +44,18 @@ class SearchFragment : Fragment() {
                 binding.searchBarEdittext.text = null
             }
         })
+
+        binding.searchBarEdittext.setOnKeyListener{ v, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                when (keyCode) {
+                    KeyEvent.KEYCODE_ENTER ,
+                    KeyEvent.KEYCODE_NUMPAD_ENTER -> {
+                        viewModel.search()
+                    }
+                }
+            }
+            false
+        }
 
         binding.viewModel = viewModel
 

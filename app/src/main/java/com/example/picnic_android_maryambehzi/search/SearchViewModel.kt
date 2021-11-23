@@ -46,9 +46,10 @@ class SearchViewModel : ViewModel() {
 
         mainHandler.post(object : Runnable {
             override fun run() {
-                if (showRandomGif.value == true)
+                if (showRandomGif.value == true){
                     getRandomGif()
-                mainHandler.postDelayed(this, 10000)
+                    mainHandler.postDelayed(this, 10000)
+                }
             }
         })
     }
@@ -64,9 +65,10 @@ class SearchViewModel : ViewModel() {
         }
     }
 
-    private fun search(){
+    fun search(){
         viewModelScope.launch {
             try {
+                _showRandomGif.value = false
                 _searchResult.value = query.value?.let { GiphyApi.retrofitService.searchQuery(query = it).data }
             }catch (e: Exception){
                 print(e)
@@ -79,12 +81,13 @@ class SearchViewModel : ViewModel() {
         input.doOnTextChanged { text, _, _, count ->
             _clearSearchBar.value = false
             _query.value = text.toString()
-            if (count >= 2) {
-                _showRandomGif.value = false
-                search()
-            }
-            else{
-                _showRandomGif.value = true
+            if (text != null) {
+                if (text.length >= 2) {
+                    _showRandomGif.value = false
+                    search()
+                } else{
+                    _showRandomGif.value = true
+                }
             }
         }
     }
