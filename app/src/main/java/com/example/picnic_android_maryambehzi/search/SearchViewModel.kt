@@ -1,9 +1,12 @@
 package com.example.picnic_android_maryambehzi.search
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.EditText
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +15,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.picnic_android_maryambehzi.network.GifModel
 import com.example.picnic_android_maryambehzi.network.GiphyApi
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class SearchViewModel : ViewModel() {
@@ -40,16 +44,21 @@ class SearchViewModel : ViewModel() {
     val clearSearchBar: LiveData<Boolean>
         get() = _clearSearchBar
 
+    private val _urlLink = MutableLiveData<String?>()
+    val urlLink: LiveData<String?>
+        get() = _urlLink
+
 
     init {
         val mainHandler = Handler(Looper.getMainLooper())
 
         mainHandler.post(object : Runnable {
             override fun run() {
-                if (showRandomGif.value == true){
+                if (showRandomGif.value == true) {
                     getRandomGif()
-                    mainHandler.postDelayed(this, 10000)
                 }
+                mainHandler.postDelayed(this, 10000)
+
             }
         })
     }
@@ -68,7 +77,7 @@ class SearchViewModel : ViewModel() {
     fun search(){
         viewModelScope.launch {
             try {
-                _showRandomGif.value = false
+                showSearchResults()
                 _searchResult.value = query.value?.let { GiphyApi.retrofitService.searchQuery(query = it).data }
             }catch (e: Exception){
                 print(e)
@@ -83,10 +92,8 @@ class SearchViewModel : ViewModel() {
             _query.value = text.toString()
             if (text != null) {
                 if (text.length >= 2) {
-                    _showRandomGif.value = false
+                    showSearchResults()
                     search()
-                } else{
-                    _showRandomGif.value = true
                 }
             }
         }
@@ -102,7 +109,19 @@ class SearchViewModel : ViewModel() {
 
     fun onBackPressed(){
         _query.value = null
-        _showRandomGif.value = true
+        showRandomGif()
         _clearSearchBar.value = true
+    }
+
+    fun showSearchResults(){
+        _showRandomGif.value = false
+    }
+
+    fun showRandomGif(){
+        _showRandomGif.value = true
+    }
+
+    fun openLinkInBrowser(){
+        _urlLink.value = gif.value?.url
     }
 }

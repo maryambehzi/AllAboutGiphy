@@ -10,9 +10,11 @@
 
     <color name="appConcrete">#F2F2F2</color>
     <color name="appYellow">#FFFF00</color>
+    <color name="appDarkYellow">#F6BE00</color>
     <color name="appYellowTransparent">#66FFFF00</color>
+    <color name="appConcreteTransparent">#33F2F2F2</color>
 
-    <color name="search_bar_bg_color">@color/appYellowTransparent</color>
-    <color name="gif_placeholder_bg_color">@color/appConcrete</color>
+    <color name="search_bar_bg_color">@color/appConcreteTransparent</color>
+    <color name="gif_placeholder_bg_color">@color/appConcreteTransparent</color>
     <color name="age_restriction_bg_color">@color/appYellow</color>
 </resources>

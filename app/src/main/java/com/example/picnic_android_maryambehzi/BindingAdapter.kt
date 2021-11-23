@@ -48,6 +48,7 @@ fun ImageView.setGifImage(gifModel: GifModel?){
 fun ImageView.setPreviewGifImage(gifModel: GifModel?){
     Glide.with(context)
         .asGif()
+        .placeholder(R.drawable.search_bar_bg)
         .load(gifModel?.images?.previewGif?.url)
         .into(this)
 }
@@ -81,14 +82,12 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<GifModel>?) {
 }
 
 @BindingAdapter("setVisibility")
-fun ImageView.setVisibility(query : String?){
-     visibility = query?.let {
-        if (it.isNotEmpty()){
+fun ImageView.setVisibility(isShown: Boolean){
+     visibility = isShown.let {
+        if (!it){
             View.VISIBLE
         }else{
             View.GONE
         }
-    } ?: run{
-        View.GONE
     }
 }

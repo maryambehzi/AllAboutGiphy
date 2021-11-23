@@ -1,5 +1,7 @@
 package com.example.picnic_android_maryambehzi.search
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -13,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.picnic_android_maryambehzi.R
 import com.example.picnic_android_maryambehzi.databinding.FragmentSearchBinding
 import com.example.picnic_android_maryambehzi.utils.PhotoGridAdapter
+import java.lang.reflect.Executable
 
 class SearchFragment : Fragment() {
 
@@ -45,6 +48,18 @@ class SearchFragment : Fragment() {
             }
         })
 
+        viewModel.urlLink.observe(viewLifecycleOwner, Observer { url ->
+            url?.let {
+                if (it.isNotEmpty())
+                    try {
+                        openBrowser(it)
+                    }catch (e: Exception){
+                        print(e)
+                    }
+
+            }
+        })
+
         binding.searchBarEdittext.setOnKeyListener{ v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN) {
                 when (keyCode) {
@@ -60,6 +75,12 @@ class SearchFragment : Fragment() {
         binding.viewModel = viewModel
 
         return binding.root
+    }
+
+    fun openBrowser(url : String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 
 }

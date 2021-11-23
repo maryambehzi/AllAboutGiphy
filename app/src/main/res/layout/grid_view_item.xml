@@ -17,7 +17,6 @@
         app:layout_constraintDimensionRatio="H,1:1"
         android:padding="@dimen/small_spacing"
         android:adjustViewBounds="true"
-        android:background="@color/gif_placeholder_bg_color"
         android:scaleType="fitXY"
         app:setPreviewGifImage="@{gif}"
         tools:src="@tools:sample/backgrounds/scenic"/>
