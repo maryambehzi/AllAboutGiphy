@@ -79,3 +79,16 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<GifModel>?) {
     val adapter = recyclerView.adapter as? PhotoGridAdapter
     adapter?.submitList(data)
 }
+
+@BindingAdapter("setVisibility")
+fun ImageView.setVisibility(query : String?){
+     visibility = query?.let {
+        if (it.isNotEmpty()){
+            View.VISIBLE
+        }else{
+            View.GONE
+        }
+    } ?: run{
+        View.GONE
+    }
+}

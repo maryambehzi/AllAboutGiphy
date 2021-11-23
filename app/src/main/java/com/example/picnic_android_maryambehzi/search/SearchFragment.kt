@@ -37,6 +37,12 @@ class SearchFragment : Fragment() {
             }
         })
 
+        viewModel.clearSearchBar.observe(viewLifecycleOwner, Observer {
+            if (it){
+                binding.searchBarEdittext.text = null
+            }
+        })
+
         binding.viewModel = viewModel
 
         return binding.root

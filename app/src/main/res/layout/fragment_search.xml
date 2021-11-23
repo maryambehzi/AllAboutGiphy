@@ -14,6 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back_icon_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="4dp"
+            android:layout_marginTop="@dimen/normal_spacing"
+            android:src="@drawable/ic_arrow_back"
+            android:onClick="@{() -> viewModel.onBackPressed()}"
+            app:setVisibility="@{viewModel.query}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/search_bar_container"
             android:layout_width="0dp"
@@ -21,7 +33,7 @@
             android:layout_margin="@dimen/normal_spacing"
             android:background="#F2F2F2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/back_icon_image"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView

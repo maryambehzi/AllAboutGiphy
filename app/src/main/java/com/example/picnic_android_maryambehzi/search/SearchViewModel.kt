@@ -28,13 +28,17 @@ class SearchViewModel : ViewModel() {
     val searchResult: LiveData<List<GifModel>>
         get() = _searchResult
 
-    private val _query = MutableLiveData<String>()
-    val query: LiveData<String>
+    private val _query = MutableLiveData<String?>()
+    val query: LiveData<String?>
         get() = _query
 
     private val _navigateToSelectedGif = MutableLiveData<GifModel>()
     val navigateToSelectedGif: LiveData<GifModel>
         get() = _navigateToSelectedGif
+
+    private val _clearSearchBar = MutableLiveData<Boolean>(false)
+    val clearSearchBar: LiveData<Boolean>
+        get() = _clearSearchBar
 
 
     init {
@@ -73,6 +77,7 @@ class SearchViewModel : ViewModel() {
 
     fun textWatcherSearch(input: EditText) {
         input.doOnTextChanged { text, _, _, count ->
+            _clearSearchBar.value = false
             _query.value = text.toString()
             if (count >= 2) {
                 _showRandomGif.value = false
@@ -90,5 +95,11 @@ class SearchViewModel : ViewModel() {
 
     fun displayGifDetailsComplete() {
         _navigateToSelectedGif.value = null
+    }
+
+    fun onBackPressed(){
+        _query.value = null
+        _showRandomGif.value = true
+        _clearSearchBar.value = true
     }
 }
