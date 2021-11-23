@@ -13,8 +13,8 @@ class PhotoGridAdapter ( val onClickListener: OnClickListener ) :
 
     class GifViewHolder(private var binding: GridViewItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(marsProperty: GifModel) {
-            binding.gif = marsProperty
+        fun bind(gifModel: GifModel) {
+            binding.gif = gifModel
             binding.executePendingBindings()
         }
     }
@@ -46,7 +46,7 @@ class PhotoGridAdapter ( val onClickListener: OnClickListener ) :
     }
 
 
-    class OnClickListener(val clickListener: (marsProperty:GifModel) -> Unit) {
-        fun onClick(marsProperty:GifModel) = clickListener(marsProperty)
+    class OnClickListener(val clickListener: (gifModel : GifModel) -> Unit) {
+        fun onClick(gifModel:GifModel) = clickListener(gifModel)
     }
 }

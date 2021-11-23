@@ -45,6 +45,7 @@ class SearchFragment : Fragment() {
         viewModel.clearSearchBar.observe(viewLifecycleOwner, Observer {
             if (it){
                 binding.searchBarEdittext.text = null
+                binding.searchBarEdittext.clearFocus()
             }
         })
 
@@ -71,6 +72,9 @@ class SearchFragment : Fragment() {
             }
             false
         }
+
+        if (binding.searchBarEdittext.hasFocus())
+            viewModel.showSearchResults()
 
         binding.viewModel = viewModel
 

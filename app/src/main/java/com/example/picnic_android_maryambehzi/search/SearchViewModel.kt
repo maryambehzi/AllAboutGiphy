@@ -1,12 +1,8 @@
 package com.example.picnic_android_maryambehzi.search
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.EditText
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +11,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.picnic_android_maryambehzi.network.GifModel
 import com.example.picnic_android_maryambehzi.network.GiphyApi
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class SearchViewModel : ViewModel() {
@@ -77,7 +72,6 @@ class SearchViewModel : ViewModel() {
     fun search(){
         viewModelScope.launch {
             try {
-                showSearchResults()
                 _searchResult.value = query.value?.let { GiphyApi.retrofitService.searchQuery(query = it).data }
             }catch (e: Exception){
                 print(e)
@@ -87,13 +81,15 @@ class SearchViewModel : ViewModel() {
     }
 
     fun textWatcherSearch(input: EditText) {
-        input.doOnTextChanged { text, _, _, count ->
+        input.doOnTextChanged { text, _, _, _ ->
             _clearSearchBar.value = false
-            _query.value = text.toString()
-            if (text != null) {
-                if (text.length >= 2) {
+            text?.let {
+                if (it.isNotEmpty()) {
                     showSearchResults()
-                    search()
+                    if (it.length >= 2 && it.toString() != query.value.toString()) {
+                        _query.value = it.toString()
+                        search()
+                    }
                 }
             }
         }
