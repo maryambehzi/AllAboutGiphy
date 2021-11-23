@@ -2,5 +2,6 @@
     <string name="app_name">picnic-android-maryambehzi</string>
     <string name="search_hint_text">Search…</string>
     <string name="random_selected_gif_title_text">Random Selected GIF:</string>
-    <string name="age_restriction_text">%1$d +</string>
+    <string name="search_result_title_text">Search Results:</string>
+    <string name="age_restriction_text">%1$d+</string>
 </resources>

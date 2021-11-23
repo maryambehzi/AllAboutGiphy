@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="tiny_spacing">4dp</dimen>
     <dimen name="small_spacing">8dp</dimen>
     <dimen name="normal_spacing">16dp</dimen>
     <dimen name="large_spacing">32dp</dimen>
+
+    <dimen name="app_corner_radius_small">4dp</dimen>
+
+    <dimen name="tiny_text">8dp</dimen>
+    <dimen name="small_text">10dp</dimen>
+    <dimen name="normal_text">12dp</dimen>
+    <dimen name="large_text">16dp</dimen>
+
+    <dimen name="back_icon_width">50dp</dimen>
+    <dimen name="back_icon_height">50dp</dimen>
+
+    <dimen name="gif_image_view_height">200dp</dimen>
+
+    <dimen name="search_bar_height">50dp</dimen>
 </resources>

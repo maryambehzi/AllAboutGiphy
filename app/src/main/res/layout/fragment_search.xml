@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.picnic_android_maryambehzi.search.SearchViewModel" />
@@ -16,26 +17,24 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/back_icon_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="4dp"
-            android:layout_marginTop="@dimen/normal_spacing"
-            android:src="@drawable/ic_arrow_back"
+            style="@style/BackButton"
             android:onClick="@{() -> viewModel.onBackPressed()}"
-            app:setVisibility="@{viewModel.query}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:setVisibility="@{viewModel.query}" />
 
+        <!-- Search Bar -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/search_bar_container"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/search_bar_height"
             android:layout_margin="@dimen/normal_spacing"
-            android:background="#F2F2F2"
+            android:background="@drawable/search_bar_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/back_icon_image"
             app:layout_constraintTop_toTopOf="parent">
 
+            <!-- Search Icon -->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/search_icon_image"
                 android:layout_width="wrap_content"
@@ -45,86 +44,86 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- Search Input -->
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/search_bar_edittext"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:hint="@string/search_hint_text"
+                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:hint="@string/search_hint_text"
                 app:layout_constraintStart_toEndOf="@+id/search_icon_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/random_gif_container"
+        <!-- Random Gif -->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_margin="@dimen/normal_spacing"
-            app:isRandomGifVisible="@{viewModel.showRandomGif}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_bar_container">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/random_selected_gif_title_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/random_selected_gif_title_text"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/random_selected_gif_image"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="@dimen/small_spacing"
-                android:background="@color/gif_placeholder_bg_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/random_selected_gif_title_text"
-                app:setGifImage="@{viewModel.gif}" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/git_title_text"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/random_gif_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textSize="10dp"
-                app:layout_constraintEnd_toEndOf="@+id/random_selected_gif_image"
-                app:layout_constraintStart_toStartOf="@+id/random_selected_gif_image"
-                app:layout_constraintTop_toBottomOf="@+id/random_selected_gif_image"
-                app:setGifTitle="@{viewModel.gif}"
-                tools:text="GIF_TITLE" />
+                app:isRandomGifVisible="@{viewModel.showRandomGif}"
+                app:layout_constraintTop_toBottomOf="@+id/search_bar_container">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/git_source_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_spacing"
-                android:layout_marginEnd="@dimen/normal_spacing"
-                android:maxLines="1"
-                android:textSize="@dimen/small_spacing"
-                app:layout_constraintEnd_toEndOf="@+id/git_title_text"
-                app:layout_constraintStart_toStartOf="@+id/git_title_text"
-                app:layout_constraintTop_toBottomOf="@+id/git_title_text"
-                app:setGifUrl="@{viewModel.gif}"
-                tools:text="WWW.GIF_SOURCE.COM" />
+                <!-- Random Gif Title -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/random_selected_gif_title_text"
+                    style="@style/Title"
+                    android:text="@string/random_selected_gif_title_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_spacing"
-                android:background="@drawable/age_restriction_bg"
-                android:padding="@dimen/small_spacing"
-                app:layout_constraintEnd_toEndOf="@+id/random_selected_gif_image"
-                app:layout_constraintTop_toBottomOf="@+id/git_source_text"
-                app:setGifRating="@{viewModel.gif}"
-                tools:text="16+" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Gif Image -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/random_selected_gif_image"
+                    style="@style/GifView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/random_selected_gif_title_text"
+                    app:setGifImage="@{viewModel.gif}" />
 
+                <!-- Gif Title -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/git_title_text"
+                    style="@style/Description.Title"
+                    app:layout_constraintEnd_toEndOf="@+id/random_selected_gif_image"
+                    app:layout_constraintStart_toStartOf="@+id/random_selected_gif_image"
+                    app:layout_constraintTop_toBottomOf="@+id/random_selected_gif_image"
+                    app:setGifTitle="@{viewModel.gif}"
+                    tools:text="GIF_TITLE" />
+
+                <!-- Gif Url -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/git_source_text"
+                    style="@style/Description.Url"
+                    app:layout_constraintEnd_toEndOf="@+id/git_title_text"
+                    app:layout_constraintStart_toStartOf="@+id/git_title_text"
+                    app:layout_constraintTop_toBottomOf="@+id/git_title_text"
+                    app:setGifUrl="@{viewModel.gif}"
+                    tools:text="WWW.GIF_SOURCE.COM" />
+
+                <!-- Gif Rating -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView"
+                    style="@style/Description.Rating"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/random_selected_gif_image"
+                    app:layout_constraintTop_toBottomOf="@+id/git_source_text"
+                    app:setGifRating="@{viewModel.gif}"
+                    tools:text="16+" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <!-- Search Results -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/searched_gifs_container"
             android:layout_width="match_parent"
@@ -134,24 +133,32 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_bar_container">
 
+            <!-- Search Results Title -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/search_result_title_text"
+                style="@style/Title"
+                android:text="@string/search_result_title_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Search Results Items -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/photos_grid"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="@dimen/small_spacing"
                 android:clipToPadding="false"
-                android:padding="6dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_result_title_text"
                 app:listData="@{viewModel.searchResult}"
-                app:spanCount="2"
+                app:spanCount="3"
                 tools:itemCount="18"
                 tools:listitem="@layout/grid_view_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

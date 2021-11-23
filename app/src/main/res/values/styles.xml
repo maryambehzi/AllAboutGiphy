@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="Title.Selected">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/large_spacing</item>
+    </style>
+    
+    <style name="GifView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/gif_image_view_height</item>
+        <item name="android:layout_marginTop">@dimen/normal_spacing</item>
+        <item name="android:background">@color/gif_placeholder_bg_color</item>
+    </style>
+
+    <style name="Description">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Description.Title">
+        <item name="android:textSize">@dimen/small_text</item>
+    </style>
+
+    <style name="Description.Url">
+        <item name="android:textSize">@dimen/tiny_text</item>
+        <item name="android:layout_marginEnd">@dimen/normal_spacing</item>
+        <item name="android:layout_marginTop">@dimen/small_spacing</item>
+    </style>
+
+    <style name="Description.Rating">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/small_spacing</item>
+        <item name="android:layout_marginBottom">@dimen/small_spacing</item>
+        <item name="android:padding">@dimen/small_spacing</item>
+        <item name="android:background">@drawable/age_restriction_bg</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BackButton">
+        <item name="android:layout_width">@dimen/back_icon_width</item>
+        <item name="android:layout_height">@dimen/back_icon_height</item>
+        <item name="android:padding">@dimen/tiny_spacing</item>
+        <item name="android:layout_marginTop">@dimen/normal_spacing</item>
+        <item name="android:src">@drawable/ic_arrow_back</item>
+    </style>
+</resources>

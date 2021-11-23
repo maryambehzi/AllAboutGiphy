@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.picnic_android_maryambehzi.detail.DetailViewModel" />
@@ -16,76 +17,79 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/back_icon_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="4dp"
-            android:layout_marginTop="@dimen/normal_spacing"
-            android:src="@drawable/ic_arrow_back"
+            style="@style/BackButton"
             android:onClick="@{() -> viewModel.onBackPressed()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Tapped Gif Title -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/gif_title_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/large_spacing"
-            app:setGifTitle="@{viewModel.selectedGif}"
+            style="@style/Title.Selected"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/back_icon_image"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:setGifTitle="@{viewModel.selectedGif}" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/selected_gif_image"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_margin="@dimen/normal_spacing"
-            android:background="@color/gif_placeholder_bg_color"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/gif_title_text"
-            app:setGifImage="@{viewModel.selectedGif}" />
+            app:layout_constraintTop_toBottomOf="@id/gif_title_text">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/git_title_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textSize="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/selected_gif_image"
-            app:layout_constraintStart_toStartOf="@+id/selected_gif_image"
-            app:layout_constraintTop_toBottomOf="@+id/selected_gif_image"
-            app:setGifTitle="@{viewModel.selectedGif}"
-            tools:text="GIF_TITLE" />
+            <!-- Tapped Gif -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/git_source_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_spacing"
-            android:layout_marginEnd="@dimen/normal_spacing"
-            android:maxLines="1"
-            android:textSize="@dimen/small_spacing"
-            app:layout_constraintEnd_toEndOf="@+id/git_title_text"
-            app:layout_constraintStart_toStartOf="@+id/git_title_text"
-            app:layout_constraintTop_toBottomOf="@+id/git_title_text"
-            app:setGifUrl="@{viewModel.selectedGif}"
-            tools:text="WWW.GIF_SOURCE.COM" />
+                <!-- Gif Image -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/selected_gif_image"
+                    style="@style/GifView"
+                    android:layout_margin="@dimen/normal_spacing"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:setGifImage="@{viewModel.selectedGif}" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_spacing"
-            android:background="@drawable/age_restriction_bg"
-            android:padding="@dimen/small_spacing"
-            app:layout_constraintEnd_toEndOf="@+id/selected_gif_image"
-            app:layout_constraintTop_toBottomOf="@+id/git_source_text"
-            app:setGifRating="@{viewModel.selectedGif}"
-            tools:text="16+" />
+                <!-- Gif Title -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/git_title_text"
+                    style="@style/Description.Title"
+                    app:layout_constraintEnd_toEndOf="@+id/selected_gif_image"
+                    app:layout_constraintStart_toStartOf="@+id/selected_gif_image"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_gif_image"
+                    app:setGifTitle="@{viewModel.selectedGif}"
+                    tools:text="GIF_TITLE" />
+
+                <!-- Gif Url -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/git_source_text"
+                    style="@style/Description.Url"
+                    app:layout_constraintEnd_toEndOf="@+id/git_title_text"
+                    app:layout_constraintStart_toStartOf="@+id/git_title_text"
+                    app:layout_constraintTop_toBottomOf="@+id/git_title_text"
+                    app:setGifUrl="@{viewModel.selectedGif}"
+                    tools:text="WWW.GIF_SOURCE.COM" />
+
+                <!-- Gif Rating -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView"
+                    style="@style/Description.Rating"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/selected_gif_image"
+                    app:layout_constraintTop_toBottomOf="@+id/git_source_text"
+                    app:setGifRating="@{viewModel.selectedGif}"
+                    tools:text="16+" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
