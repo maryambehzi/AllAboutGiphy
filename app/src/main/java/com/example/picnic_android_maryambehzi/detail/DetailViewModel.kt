@@ -16,11 +16,19 @@ class DetailViewModel(gifModel: GifModel, app: Application) : AndroidViewModel(a
     val backIsPresses: LiveData<Boolean>
         get() = _backIsPresses
 
+    private val _urlLink = MutableLiveData<String?>()
+    val urlLink: LiveData<String?>
+        get() = _urlLink
+
     init {
         _selectedGif.value = gifModel
     }
 
     fun onBackPressed(){
         _backIsPresses.value = true
+    }
+
+    fun openLinkInBrowser(){
+        _urlLink.value = selectedGif.value?.url
     }
 }

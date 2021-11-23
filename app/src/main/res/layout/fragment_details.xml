@@ -70,6 +70,7 @@
                 <!-- Gif Url -->
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/git_source_text"
+                    android:onClick="@{() -> viewModel.openLinkInBrowser()}"
                     style="@style/Description.Url"
                     app:layout_constraintEnd_toEndOf="@+id/git_title_text"
                     app:layout_constraintStart_toStartOf="@+id/git_title_text"

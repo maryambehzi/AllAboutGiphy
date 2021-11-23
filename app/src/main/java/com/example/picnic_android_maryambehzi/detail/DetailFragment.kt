@@ -1,5 +1,7 @@
 package com.example.picnic_android_maryambehzi.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,9 +34,27 @@ class DetailFragment : Fragment() {
             }
         })
 
+        viewModel.urlLink.observe(viewLifecycleOwner, Observer { url ->
+            url?.let {
+                if (it.isNotEmpty())
+                    try {
+                        openBrowser(it)
+                    }catch (e: Exception){
+                        print(e)
+                    }
+
+            }
+        })
+
 
         binding.lifecycleOwner = this
 
         return binding.root
+    }
+
+    private fun openBrowser(url : String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 }
