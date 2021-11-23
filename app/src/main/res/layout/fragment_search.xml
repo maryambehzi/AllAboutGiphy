@@ -85,6 +85,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/random_selected_gif_title_text"
+                    app:layout_constraintBottom_toTopOf="@id/git_title_text"/>
+
                 <!-- Gif Image -->
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/random_selected_gif_image"

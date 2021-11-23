@@ -40,6 +40,7 @@ fun TextView.setGifRating(gifModel: GifModel?) {
 fun ImageView.setGifImage(gifModel: GifModel?){
     Glide.with(context)
         .asGif()
+        .placeholder(R.drawable.gif_placeholder_bg)
         .load(gifModel?.images?.fixedHeight?.url)
         .into(this)
 }
@@ -48,7 +49,7 @@ fun ImageView.setGifImage(gifModel: GifModel?){
 fun ImageView.setPreviewGifImage(gifModel: GifModel?){
     Glide.with(context)
         .asGif()
-        .placeholder(R.drawable.search_bar_bg)
+        .placeholder(R.drawable.gif_placeholder_bg)
         .load(gifModel?.images?.previewGif?.url)
         .into(this)
 }
