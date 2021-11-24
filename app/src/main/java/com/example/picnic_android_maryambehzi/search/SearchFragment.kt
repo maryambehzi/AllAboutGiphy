@@ -94,9 +94,4 @@ class SearchFragment : Fragment() {
         viewModel.appResumed()
         viewModel.linkHasBeenShowed()
     }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.stopHandler()
-    }
 }

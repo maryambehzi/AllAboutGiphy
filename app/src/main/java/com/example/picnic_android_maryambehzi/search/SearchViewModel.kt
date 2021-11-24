@@ -28,7 +28,7 @@ class SearchViewModel : ViewModel() {
         get() = _searchResult
 
     private val _query = MutableLiveData<String?>()
-    private val query: LiveData<String?>
+    val query: LiveData<String?>
         get() = _query
 
     private val _textInput = MutableLiveData<String?>()
@@ -82,6 +82,8 @@ class SearchViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 _searchResult.value = query.value?.let { GiphyApi.retrofitService.searchQuery(query = it).data }
+                if (query.value.isNullOrEmpty())
+                    _searchResult.value = emptyList()
             }catch (e: Exception){
                 print(e)
                 _searchResult.value = emptyList()
@@ -100,6 +102,10 @@ class SearchViewModel : ViewModel() {
                         _textInput.value = it.toString()
                         search()
                     }
+                }
+                else{
+                    _textInput.value = null
+                    _searchResult.value = emptyList()
                 }
             }
         }
@@ -144,6 +150,9 @@ class SearchViewModel : ViewModel() {
         _onBackground.value = false
     }
 
-    fun stopHandler(){
+    fun clearInputs(){
+        _clearSearchBar.value = true
+        _query.value = null
+        _searchResult.value = emptyList()
     }
 }

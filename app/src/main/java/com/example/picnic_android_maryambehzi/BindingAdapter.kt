@@ -1,6 +1,7 @@
 package com.example.picnic_android_maryambehzi
 
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -89,6 +90,17 @@ fun ImageView.setVisibility(isShown: Boolean){
             View.VISIBLE
         }else{
             View.GONE
+        }
+    }
+}
+
+@BindingAdapter("setVisibility")
+fun ImageButton.setVisibility(input: String?){
+    visibility = input.let {
+        if (it.isNullOrEmpty()){
+            View.GONE
+        }else{
+            View.VISIBLE
         }
     }
 }

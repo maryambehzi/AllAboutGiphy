@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="appConcrete">#F2F2F2</color>
+    <color name="appDustyGray">#999999</color>
     <color name="appYellow">#FFFF00</color>
     <color name="appDarkYellow">#F6BE00</color>
     <color name="appYellowTransparent">#66FFFF00</color>
@@ -17,4 +18,5 @@
     <color name="search_bar_bg_color">@color/appConcreteTransparent</color>
     <color name="gif_placeholder_bg_color">@color/appConcreteTransparent</color>
     <color name="age_restriction_bg_color">@color/appYellow</color>
+    <color name="clear_input_background_edittext_color">@color/appDustyGray</color>
 </resources>

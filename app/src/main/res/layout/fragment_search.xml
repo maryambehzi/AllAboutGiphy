@@ -60,6 +60,19 @@
                 app:layout_constraintStart_toEndOf="@+id/search_icon_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="@dimen/clear_input_icon_width"
+                android:layout_height="@dimen/clear_input_icon_height"
+                android:background="@drawable/clear_input_icon_bg"
+                android:src="@drawable/ic_close"
+                android:padding="@dimen/small_spacing"
+                android:layout_marginEnd="@dimen/normal_spacing"
+                android:onClick="@{() -> viewModel.clearInputs()}"
+                app:setVisibility="@{viewModel.query}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Random Gif -->
