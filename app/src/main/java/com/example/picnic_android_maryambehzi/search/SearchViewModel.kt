@@ -39,9 +39,13 @@ class SearchViewModel : ViewModel() {
     val clearSearchBar: LiveData<Boolean>
         get() = _clearSearchBar
 
-    private val _urlLink = MutableLiveData<String?>()
-    val urlLink: LiveData<String?>
-        get() = _urlLink
+    private val _openUrlLink = MutableLiveData<Boolean?>(false)
+    val openUrlLink: LiveData<Boolean?>
+        get() = _openUrlLink
+
+    private val _onBackground = MutableLiveData<Boolean?>(false)
+    val onBackground: LiveData<Boolean?>
+        get() = _onBackground
 
 
     init {
@@ -49,7 +53,7 @@ class SearchViewModel : ViewModel() {
 
         mainHandler.post(object : Runnable {
             override fun run() {
-                if (showRandomGif.value == true) {
+                if (showRandomGif.value == true  && onBackground.value == false ) {
                     getRandomGif()
                 }
                 mainHandler.postDelayed(this, 10000)
@@ -118,6 +122,18 @@ class SearchViewModel : ViewModel() {
     }
 
     fun openLinkInBrowser(){
-        _urlLink.value = gif.value?.url
+        _openUrlLink.value = true
+    }
+
+    fun linkHasBeenShowed(){
+        _openUrlLink.value = false
+    }
+
+    fun appPaused(){
+        _onBackground.value = true
+    }
+
+    fun appResumed(){
+        _onBackground.value = false
     }
 }

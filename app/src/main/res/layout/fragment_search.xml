@@ -144,7 +144,8 @@
             android:layout_margin="@dimen/normal_spacing"
             app:isSearchedGifsVisible="@{viewModel.showRandomGif}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_bar_container">
+            app:layout_constraintTop_toBottomOf="@id/search_bar_container"
+            tools:visibility="gone">
 
             <!-- Search Results Title -->
             <androidx.appcompat.widget.AppCompatTextView

@@ -49,11 +49,11 @@ class SearchFragment : Fragment() {
             }
         })
 
-        viewModel.urlLink.observe(viewLifecycleOwner, Observer { url ->
-            url?.let {
-                if (it.isNotEmpty())
+        viewModel.openUrlLink.observe(viewLifecycleOwner, Observer { isClicked ->
+            isClicked?.let {
+                if (it)
                     try {
-                        openBrowser(it)
+                        openBrowser(viewModel.gif.value?.url)
                     }catch (e: Exception){
                         print(e)
                     }
@@ -81,10 +81,20 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-    private fun openBrowser(url : String) {
+    private fun openBrowser(url : String?) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         startActivity(intent)
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.appPaused()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.appResumed()
+        viewModel.linkHasBeenShowed()
+    }
 }
