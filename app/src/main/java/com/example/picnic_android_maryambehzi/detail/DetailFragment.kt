@@ -19,9 +19,9 @@ class DetailFragment : Fragment() {
 
         val binding = FragmentDetailsBinding.inflate(inflater)
 
-        val gifmodel = DetailFragmentArgs.fromBundle(requireArguments()).gifModel
+        val gifModel = DetailFragmentArgs.fromBundle(requireArguments()).gifModel
 
-        val viewModelFactory = DetailViewModelFactory(gifmodel, application)
+        val viewModelFactory = DetailViewModelFactory(gifModel, application)
 
         val viewModel = ViewModelProvider(
             this, viewModelFactory).get(DetailViewModel::class.java)
@@ -34,11 +34,12 @@ class DetailFragment : Fragment() {
             }
         })
 
-        viewModel.urlLink.observe(viewLifecycleOwner, Observer { url ->
-            url?.let {
-                if (it.isNotEmpty())
+        viewModel.openUrlLink.observe(viewLifecycleOwner, Observer { isClicked ->
+            isClicked?.let {
+                if (it)
                     try {
-                        openBrowser(it)
+                        openBrowser(viewModel.selectedGif.value?.url)
+                        viewModel.linkHasBeenShowed()
                     }catch (e: Exception){
                         print(e)
                     }
@@ -52,7 +53,7 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
-    private fun openBrowser(url : String) {
+    private fun openBrowser(url : String?) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         startActivity(intent)

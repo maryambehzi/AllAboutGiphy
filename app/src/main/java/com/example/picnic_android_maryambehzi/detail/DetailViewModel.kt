@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.Navigation
 import com.example.picnic_android_maryambehzi.network.GifModel
 
 class DetailViewModel(gifModel: GifModel, app: Application) : AndroidViewModel(app)   {
@@ -16,9 +15,9 @@ class DetailViewModel(gifModel: GifModel, app: Application) : AndroidViewModel(a
     val backIsPresses: LiveData<Boolean>
         get() = _backIsPresses
 
-    private val _urlLink = MutableLiveData<String?>()
-    val urlLink: LiveData<String?>
-        get() = _urlLink
+    private val _openUrlLink = MutableLiveData<Boolean?>()
+    val openUrlLink: LiveData<Boolean?>
+        get() = _openUrlLink
 
     init {
         _selectedGif.value = gifModel
@@ -29,6 +28,10 @@ class DetailViewModel(gifModel: GifModel, app: Application) : AndroidViewModel(a
     }
 
     fun openLinkInBrowser(){
-        _urlLink.value = selectedGif.value?.url
+        _openUrlLink.value = true
+    }
+
+    fun linkHasBeenShowed(){
+        _openUrlLink.value = false
     }
 }
