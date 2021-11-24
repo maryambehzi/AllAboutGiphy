@@ -15,6 +15,10 @@ import java.lang.Exception
 
 class SearchViewModel : ViewModel() {
 
+    private val _status = MutableLiveData<Boolean>(false)
+    val status: LiveData<Boolean>
+        get() = _status
+
     private val _showRandomGif = MutableLiveData<Boolean>(true)
     val showRandomGif: LiveData<Boolean>
         get() = _showRandomGif
@@ -84,9 +88,11 @@ class SearchViewModel : ViewModel() {
                 _searchResult.value = query.value?.let { GiphyApi.retrofitService.searchQuery(query = it).data }
                 if (query.value.isNullOrEmpty())
                     _searchResult.value = emptyList()
+                _status.value = false
             }catch (e: Exception){
                 print(e)
                 _searchResult.value = emptyList()
+                _status.value = false
             }
         }
     }
@@ -101,6 +107,7 @@ class SearchViewModel : ViewModel() {
                     if (it.length >= 2 && it.toString() != textInput.value.toString()) {
                         _textInput.value = it.toString()
                         search()
+                        _status.value = true
                     }
                 }
                 else{

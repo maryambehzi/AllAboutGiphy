@@ -3,6 +3,7 @@ package com.example.picnic_android_maryambehzi
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
@@ -102,5 +103,18 @@ fun ImageButton.setVisibility(input: String?){
         }else{
             View.VISIBLE
         }
+    }
+}
+
+@BindingAdapter("setVisibility")
+fun ProgressBar.setVisibility(isShown: Boolean?){
+    visibility = isShown?.let {
+        if (it){
+            View.VISIBLE
+        }else{
+            View.GONE
+        }
+    } ?: run {
+        View.GONE
     }
 }
