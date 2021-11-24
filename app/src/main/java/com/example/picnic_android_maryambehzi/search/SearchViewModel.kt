@@ -31,6 +31,10 @@ class SearchViewModel : ViewModel() {
     private val query: LiveData<String?>
         get() = _query
 
+    private val _textInput = MutableLiveData<String?>()
+    private val textInput: LiveData<String?>
+        get() = _textInput
+
     private val _navigateToSelectedGif = MutableLiveData<GifModel>()
     val navigateToSelectedGif: LiveData<GifModel>
         get() = _navigateToSelectedGif
@@ -90,9 +94,10 @@ class SearchViewModel : ViewModel() {
             _clearSearchBar.value = false
             text?.let {
                 if (it.isNotEmpty()) {
+                    _query.value = it.toString()
                     showSearchResults()
-                    if (it.length >= 2 && it.toString() != query.value.toString()) {
-                        _query.value = it.toString()
+                    if (it.length >= 2 && it.toString() != textInput.value.toString()) {
+                        _textInput.value = it.toString()
                         search()
                     }
                 }
@@ -110,6 +115,7 @@ class SearchViewModel : ViewModel() {
 
     fun onBackPressed(){
         _query.value = null
+        _textInput.value = null
         showRandomGif()
         _clearSearchBar.value = true
     }
