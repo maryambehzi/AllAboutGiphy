@@ -48,7 +48,7 @@ class DetailFragment : Fragment() {
         })
 
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = requireActivity()
 
         return binding.root
     }

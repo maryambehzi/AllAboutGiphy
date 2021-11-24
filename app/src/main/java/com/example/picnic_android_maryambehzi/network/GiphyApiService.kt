@@ -1,5 +1,6 @@
 package com.example.picnic_android_maryambehzi.network
 
+import com.example.picnic_android_maryambehzi.network.models.SearchResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit

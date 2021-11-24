@@ -28,7 +28,7 @@ class SearchViewModel : ViewModel() {
         get() = _searchResult
 
     private val _query = MutableLiveData<String?>()
-    val query: LiveData<String?>
+    private val query: LiveData<String?>
         get() = _query
 
     private val _navigateToSelectedGif = MutableLiveData<GifModel>()
@@ -47,9 +47,10 @@ class SearchViewModel : ViewModel() {
     val onBackground: LiveData<Boolean?>
         get() = _onBackground
 
+    val mainHandler = Handler(Looper.getMainLooper())
 
     init {
-        val mainHandler = Handler(Looper.getMainLooper())
+
 
         mainHandler.post(object : Runnable {
             override fun run() {
@@ -99,7 +100,7 @@ class SearchViewModel : ViewModel() {
         }
     }
 
-    fun displayPropertyDetails(gifModel: GifModel) {
+    fun displayGifDetails(gifModel: GifModel) {
         _navigateToSelectedGif.value = gifModel
     }
 
@@ -117,7 +118,7 @@ class SearchViewModel : ViewModel() {
         _showRandomGif.value = false
     }
 
-    fun showRandomGif(){
+    private fun showRandomGif(){
         _showRandomGif.value = true
     }
 
@@ -135,5 +136,8 @@ class SearchViewModel : ViewModel() {
 
     fun appResumed(){
         _onBackground.value = false
+    }
+
+    fun stopHandler(){
     }
 }

@@ -3,7 +3,6 @@ package com.example.picnic_android_maryambehzi.search
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.picnic_android_maryambehzi.R
 import com.example.picnic_android_maryambehzi.databinding.FragmentSearchBinding
 import com.example.picnic_android_maryambehzi.utils.PhotoGridAdapter
-import java.lang.reflect.Executable
 
 class SearchFragment : Fragment() {
 
@@ -32,7 +29,7 @@ class SearchFragment : Fragment() {
         viewModel.textWatcherSearch(binding.searchBarEdittext)
 
         binding.photosGrid.adapter = PhotoGridAdapter(PhotoGridAdapter.OnClickListener {
-            viewModel.displayPropertyDetails(it)
+            viewModel.displayGifDetails(it)
         })
 
         viewModel.navigateToSelectedGif.observe(viewLifecycleOwner, Observer {
@@ -96,5 +93,10 @@ class SearchFragment : Fragment() {
         super.onResume()
         viewModel.appResumed()
         viewModel.linkHasBeenShowed()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopHandler()
     }
 }

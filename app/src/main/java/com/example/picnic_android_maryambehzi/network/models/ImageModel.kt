@@ -7,9 +7,9 @@ import kotlinx.android.parcel.RawValue
 
 @Parcelize
 data class ImageModel(
-    @Json(name = ImagesKeys.ORIGINAL) val original : @RawValue OriginalModel,
-    @Json(name = ImagesKeys.FIXED_HEIGHT) val fixedHeight : @RawValue OriginalModel,
-    @Json(name = ImagesKeys.PREVIEW_GIF) val previewGif :  @RawValue OriginalModel
+    @Json(name = ImagesKeys.ORIGINAL) val original : @RawValue AddressModel,
+    @Json(name = ImagesKeys.FIXED_HEIGHT) val fixedHeight : @RawValue AddressModel,
+    @Json(name = ImagesKeys.PREVIEW_GIF) val previewGif :  @RawValue AddressModel
 ) : Parcelable
 
 object ImagesKeys{

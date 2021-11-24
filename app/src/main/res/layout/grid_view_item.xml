@@ -11,7 +11,7 @@
     </data>
 
     <ImageView
-        android:id="@+id/mars_image"
+        android:id="@+id/searched_gif_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintDimensionRatio="H,1:1"
