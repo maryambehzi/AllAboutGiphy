@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.giphy.com/v1/gifs/"
-private const val API_KEY = "ZY2avPUSjnFFy0FcjbTLpKNHfAdJD9Vt"
+private const val API_KEY = "ndkeFchWcYYGxxGJ4ukkLAg1LBQ5U3eC"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
