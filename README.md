@@ -78,3 +78,4 @@ _Thanks in advance for your time and interest in Picnic!_
 
 [wireframe-image]: https://imgur.com/r72vQbz.png
 [github-labels]: https://help.github.com/articles/about-labels
+# AllAboutGiphy
